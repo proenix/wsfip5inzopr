@@ -140,5 +140,10 @@ namespace Apka1
             y = (pictureBox1.Height / 28) * trackBar2.Value;
             odbijacz(RR, pictureBox1.Height - y);
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
