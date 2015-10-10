@@ -76,7 +76,7 @@ namespace Apka1
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            // scroll
+            // scroll lewy
             int y;
             y = (pictureBox1.Height / 28) * trackBar1.Value;
             odbijacz(LL, pictureBox1.Height - y);
@@ -133,6 +133,12 @@ namespace Apka1
 
         }
 
-
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            // scroll prawy
+            int y;
+            y = (pictureBox1.Height / 28) * trackBar2.Value;
+            odbijacz(RR, pictureBox1.Height - y);
+        }
     }
 }
