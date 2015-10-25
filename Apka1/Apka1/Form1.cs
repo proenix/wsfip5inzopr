@@ -56,9 +56,11 @@ namespace Apka1
             RR.fig.c = Color.Orange;
             RR.pset();
 
-            tabFig[0].p[0].X = 50;
-            tabFig[0].p[0].Y = 50;
+            // punk startu piłeczki nr 1
+            tabFig[0].p[0].X =  LL.X + (int)p1.Width / 2;  // położenie piłeczki, współrzędna pozioma, zależna od położenia i szerokości lewego odbijacza
+            tabFig[0].p[0].Y = pictureBox1.Size.Height - 50;
             // Y - szerokość, wysokość elipsy
+            p1.Color = Color.Orange;
             tabFig[0].p[1].X = 50;
             tabFig[0].p[1].Y = 50;
         }
@@ -77,16 +79,15 @@ namespace Apka1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // serwuj piłeczkę
             // narysuj piłeczkę w kolorze "kolor"
             // współrzędne piłeczki
             // współrzędna X = {x1, y2}   współrzędna Y = {x2, y2}
             // X - lewy góry róg kwadratu, w który będzie wpisana elipsa
-            tabFig[0].p[0].X = 50;
-            tabFig[0].p[0].Y = 50;
-            // Y - szerokość, wysokość elipsy
-            tabFig[0].p[1].X = 50;
-            tabFig[0].p[1].Y = 50;
+            tabFig[0].p[0].X = LL.X + (int)p1.Width / 2; 
+            tabFig[0].p[0].Y = pictureBox1.Size.Height - 50;
 
+            p1.Color = Color.Orange;
             g1.DrawEllipse(p1, tabFig[0].p[0].X, tabFig[0].p[0].Y, tabFig[0].p[1].X, tabFig[0].p[1].Y);
         }
 
@@ -159,23 +160,29 @@ namespace Apka1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // usuń obiekt z picture box
+            // 1. usuń obiekt z picture box
             p1.Color = pictureBox1.BackColor;
             g1.DrawEllipse(p1, tabFig[0].p[0].X, tabFig[0].p[0].Y, tabFig[0].p[1].X, tabFig[0].p[1].Y);
-
-            // zesuń poziomo
-            tabFig[0].p[0].X += 30;      
-            // sprawdź przekroczenie krawedzi prawej, lewej
-            if (tabFig[0].p[0].X > pictureBox1.Width) tabFig[0].p[0].X = 20;     
-
-            // rysuj obiekt na picturebox
+  
+            // 2. przesuń poziomo
+            tabFig[0].p[0].X = tabFig[0].p[0].X + 5;
+            // tabFig[0].p[0].Y = tabFig[0].p[0].Y + 20;
+            // 3. sprawdź przekroczenie krawędzi prawej, lewej
+            if (tabFig[0].p[0].X > pictureBox1.Width) tabFig[0].p[0].X = 20;
+            // if (tabFig[0].p[0].Y > pictureBox1.Height) tabFig[0].p[0].Y = 20;
+            // 4. rysuj obiekt na picture box
             p1.Color = Color.DarkBlue;
             g1.DrawEllipse(p1, tabFig[0].p[0].X, tabFig[0].p[0].Y, tabFig[0].p[1].X, tabFig[0].p[1].Y);
+            // 5. timer stop jeżeli piłeczka przekroczyła prawą krawędź
+            // sprawdzamy położenie lewej krawędzi piłeczki
+            //            zmienna   tabFig[0].p[0].X
+            if (tabFig[0].p[0].X >= pictureBox1.Width) timer1.Stop();
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            timer1.Start();
+            timer1.Stop();
 
         }
 
