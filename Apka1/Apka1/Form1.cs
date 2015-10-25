@@ -71,7 +71,8 @@ namespace Apka1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            g1.DrawLine(p1, 1, 1, pictureBox1.Width, pictureBox1.Height);
+            //g1.DrawLine(p1, 1, 1, pictureBox1.Width, pictureBox1.Height);
+            timer1.Start();
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -143,7 +144,18 @@ namespace Apka1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            // usuń obiekt z picture box
+            p1.Color = pictureBox1.BackColor;
+            g1.DrawEllipse(p1, tabFig[0].p[0].X, tabFig[0].p[0].Y, tabFig[0].p[1].X, tabFig[0].p[1].Y);
 
+            // zesuń poziomo
+            tabFig[0].p[0].X += 30;
+            // sprawdź przekroczenie krawedzi prawej, lewej
+            if (tabFig[0].p[0].X > pictureBox1.Width) tabFig[0].p[0].X = 20;
+
+            // rysuj obiekt na picturebox
+            p1.Color = Color.DarkBlue;
+            g1.DrawEllipse(p1, tabFig[0].p[0].X, tabFig[0].p[0].Y, tabFig[0].p[1].X, tabFig[0].p[1].Y);
         }
     }
 }
