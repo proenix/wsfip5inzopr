@@ -178,5 +178,12 @@ namespace Apka1
             timer1.Start();
 
         }
+
+        private void trackBar3_Scroll(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            timer1.Interval = 20 + 5 * trackBar3.Value;
+            timer1.Start();
+        }
     }
 }
