@@ -55,6 +55,12 @@ namespace Apka1
             RR.Y = pictureBox1.Size.Height / 2;
             RR.fig.c = Color.Orange;
             RR.pset();
+
+            tabFig[0].p[0].X = 50;
+            tabFig[0].p[0].Y = 50;
+            // Y - szerokość, wysokość elipsy
+            tabFig[0].p[1].X = 50;
+            tabFig[0].p[1].Y = 50;
         }
 
         private void odbijacz(odb o1, int y)
@@ -71,8 +77,17 @@ namespace Apka1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //g1.DrawLine(p1, 1, 1, pictureBox1.Width, pictureBox1.Height);
-            timer1.Start();
+            // narysuj piłeczkę w kolorze "kolor"
+            // współrzędne piłeczki
+            // współrzędna X = {x1, y2}   współrzędna Y = {x2, y2}
+            // X - lewy góry róg kwadratu, w który będzie wpisana elipsa
+            tabFig[0].p[0].X = 50;
+            tabFig[0].p[0].Y = 50;
+            // Y - szerokość, wysokość elipsy
+            tabFig[0].p[1].X = 50;
+            tabFig[0].p[1].Y = 50;
+
+            g1.DrawEllipse(p1, tabFig[0].p[0].X, tabFig[0].p[0].Y, tabFig[0].p[1].X, tabFig[0].p[1].Y);
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -149,13 +164,19 @@ namespace Apka1
             g1.DrawEllipse(p1, tabFig[0].p[0].X, tabFig[0].p[0].Y, tabFig[0].p[1].X, tabFig[0].p[1].Y);
 
             // zesuń poziomo
-            tabFig[0].p[0].X += 30;
+            tabFig[0].p[0].X += 30;      
             // sprawdź przekroczenie krawedzi prawej, lewej
-            if (tabFig[0].p[0].X > pictureBox1.Width) tabFig[0].p[0].X = 20;
+            if (tabFig[0].p[0].X > pictureBox1.Width) tabFig[0].p[0].X = 20;     
 
             // rysuj obiekt na picturebox
             p1.Color = Color.DarkBlue;
             g1.DrawEllipse(p1, tabFig[0].p[0].X, tabFig[0].p[0].Y, tabFig[0].p[1].X, tabFig[0].p[1].Y);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+
         }
     }
 }
