@@ -68,6 +68,7 @@ namespace Apka1
             // kierunek i przesuniećie początkowe piłeczki nr 1
             tabFig[0].m = 1; // w prawo
             tabFig[0].k = 2; // renderuj dwa piksele
+            tabFig[0].v = 0; // w górę
         }
 
         private void odbijacz(odb o1, int y)
@@ -139,7 +140,8 @@ namespace Apka1
             public System.Drawing.Point[] p;
             public char f;
             public Color c;
-            public int m;  // 0 - lewo, 1 - prawo  kierunek ruchu piłeczki 
+            public int m;  // 0 - lewo, 1 - prawo  kierunek ruchu piłeczki
+            public int v;  // 0 - góra, 1 - dół  kierunek ruchu piłeczki 
             public int k;  // przesunięcie obiektu w pikselach
 
             public fig1()
@@ -169,13 +171,26 @@ namespace Apka1
             p1.Color = pictureBox1.BackColor;
             g1.DrawEllipse(p1, tabFig[0].p[0].X, tabFig[0].p[0].Y, tabFig[0].p[1].X, tabFig[0].p[1].Y);
   
-            // 2. przesuń poziomo obiekty ruchome
+            // 2. przesuń poziomo i pionowo obiekty ruchome
             // 2.1 kierunek zmieniany po kolizji z odbijaczem
             // 2.2 piłeczka nr 1
-            if (tabFig[0].m == 1)  // sprawdzamy kierunek
-                tabFig[0].p[0].X = tabFig[0].p[0].X + tabFig[0].k;
+            if (tabFig[0].m == 1)  // sprawdzamy kierunek poziomy
+            {
+                tabFig[0].p[0].X = tabFig[0].p[0].X + tabFig[0].k;  // poziomo
+            }
             else
+            {
                 tabFig[0].p[0].X = tabFig[0].p[0].X - tabFig[0].k;
+            }
+
+            if (tabFig[0].v == 1)  // sprawdzamy kierunek pionowy
+            {
+                tabFig[0].p[0].Y = tabFig[0].p[0].Y + tabFig[0].k;  // pionowo
+            }
+            else
+            {
+                tabFig[0].p[0].Y = tabFig[0].p[0].Y - tabFig[0].k;
+            }
 
             // tabFig[0].p[0].Y = tabFig[0].p[0].Y + 20;
             // 3. sprawdź przekroczenie krawędzi prawej, lewej  piłeczki 1
@@ -195,6 +210,13 @@ namespace Apka1
             // sprawdzamy położenie prawej krawędzi piłeczki nr 1 względem lewej krawędzi okienka
             //            zmienna   tabFig[0].p[0].X
             if (tabFig[0].p[0].X + tabFig[0].p[1].X + (int)p1.Width / 2 <= 1) timer1.Stop();
+
+            // 5.3 odbij piłeczkę nr 1 od górnej i dolnej krawędzi 
+            if ((tabFig[0].p[0].Y - (int)p1.Width / 2 <= 1) || (tabFig[0].p[0].Y >= pictureBox1.Height ))
+                if (tabFig[0].v == 1)
+                    tabFig[0].v = 0;
+                else
+                    tabFig[0].v = 1;
 
 
             // 6.1 odbicie piłeczki nr 1 (prawa krawędź) od prawego odbijacza (lewa krwędź)
