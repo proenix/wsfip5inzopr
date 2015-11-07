@@ -177,6 +177,20 @@ namespace Apka1
             // sprawdzamy położenie lewej krawędzi piłeczki
             //            zmienna   tabFig[0].p[0].X
             if (tabFig[0].p[0].X >= pictureBox1.Width) timer1.Stop();
+            // 6. odbicie piłeczki (prawa krawędź) od prawego odbijacza (lewa krwędź)
+            if (/* wsp. X */ tabFig[0].p[0].X + tabFig[0].p[1].X + (int)p1.Width / 2 >= RR.X - (int)p1.Width / 2)
+                /* wsp. Y - górna, dolna krwędź piłeczki */
+            if ((/* górna krwędź piłeczki */ tabFig[0].p[0].Y - (int)p1.Width/2 >= RR.Y - RR.height/2 /* poniżej */  ) &&
+                 (/* górna krwędź piłeczki */ tabFig[0].p[0].Y - (int)p1.Width/2 <= RR.Y + RR.height/2 /* powyżej */)
+               ||
+                 (/* dolna krwędź piłeczki */ 
+                  tabFig[0].p[0].Y + tabFig[0].p[1].Y  <= RR.Y + RR.height/2) &&
+                 (tabFig[0].p[0].Y + tabFig[0].p[1].Y  >= RR.Y - RR.height/2)
+             )
+                 timer1.Stop();
+
+
+
 
         }
 
